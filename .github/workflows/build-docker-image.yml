@@ -85,6 +85,9 @@ jobs:
           cache-to: ${{ env.USE_CACHE == 'true' && 'type=gha,mode=max' || '' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args: |
+            APP_VERSION=${{ steps.metadata.outputs.version }}
+            APP_GIT_COMMIT=${{ github.sha }}
 
       - name: Update description on Docker Hub
         uses: peter-evans/dockerhub-description@v4
